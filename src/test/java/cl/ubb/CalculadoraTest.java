@@ -23,9 +23,8 @@ public class CalculadoraTest {
 				
 		int resultado = calc.sumar(1,2);
 		
-		assertEquals(3,resultado);
-		
-		
+		assertEquals(3,resultado);		
+				
 	}
 	
 	@Test	
