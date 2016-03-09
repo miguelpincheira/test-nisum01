@@ -1,5 +1,8 @@
 package cl.ubb;
 
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
+
 public class Calculadora {
 
 	public int sumar(int numero1, int numero2) {	
@@ -13,7 +16,8 @@ public class Calculadora {
 
 	public int sumar(String expresion) throws BadExpressionException  {
 		
-		if(expresion ==null || expresion.isEmpty())
+		
+		if(isEmpty(expresion))
 			throw new BadExpressionException();
 		
 		String[] numbers = expresion.split("\\+");
