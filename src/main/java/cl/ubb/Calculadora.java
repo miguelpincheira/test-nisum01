@@ -6,21 +6,28 @@ public class Calculadora {
 		return (numero1+numero2); 
 	}
 
-	public int restar(int i, int j) {
+	public int restar(int numero1, int numero2) {
 		
-		return 1;
+		return (numero1-numero2);
 	}
 
-	public int sumar(String expresion) throws EmptyExpressionException  {
+	public int sumar(String expresion) throws BadExpressionException  {
 		
 		if(expresion ==null || expresion.isEmpty())
-			throw new EmptyExpressionException();
+			throw new BadExpressionException();
 		
 		String[] numbers = expresion.split("\\+");
 		
+		if (numbers.length == 0)
+			throw new BadExpressionException();
+		
 		int suma = 0;
 		for (String number : numbers) {
-			suma = suma + Integer.valueOf(number);
+			try {			
+				suma = suma + Integer.valueOf(number.trim());
+			}catch (NumberFormatException ex){
+				throw new BadExpressionException();
+			}
 		}
 				
 		return suma;

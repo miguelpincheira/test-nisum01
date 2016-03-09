@@ -31,13 +31,22 @@ public class CalculadoraTest {
 	@Test	
 	public void menosUnoMasDosEsUno() {
 		
-		
 		int resultado = calc.sumar(-1,2);
 		
 		assertEquals(1,resultado);
 		
 		
 	}
+	
+	@Test 
+	public void veinteMenosCincoEsQuince(){
+		
+		int resultado = calc.restar(20, 5);
+		
+		assertThat(resultado,is(15));
+		
+	}
+	
 	
 	@Test
 	public void dosMenosUnoEsUno(){
@@ -49,24 +58,48 @@ public class CalculadoraTest {
 	}
 	
 	@Test	
-	public void debeSumarExpresion() throws EmptyExpressionException{
+	public void debeSumarExpresion() throws BadExpressionException{
 		
 		int resultado = calc.sumar("1+2+4");
 		
 		assertThat(resultado,is(7));
 	}
 	
-	@Test (expected=EmptyExpressionException.class)
-	public void expresionVaciaArrojaExcepcion() throws EmptyExpressionException{ 
+	@Test	
+	public void debeSumarExpresionConEspacios() throws BadExpressionException{
+		
+		int resultado = calc.sumar(" 1 + 2 + 4 ");
+		
+		assertThat(resultado,is(7));
+	}
+	
+	
+	@Test (expected=BadExpressionException.class)
+	public void expresionVaciaArrojaExcepcion() throws BadExpressionException{ 
 		
 		calc.sumar("");
 		
 	}
 	
-	@Test (expected=EmptyExpressionException.class)
-	public void expresionNulaArrojaExcepcion() throws EmptyExpressionException{ 
+	@Test (expected=BadExpressionException.class)
+	public void expresionNulaArrojaExcepcion() throws BadExpressionException{ 
 		
 		calc.sumar(null);
+		
+	}
+	
+	
+	@Test (expected=BadExpressionException.class)
+	public void expresionSinNumeroArrojaExcepcion() throws BadExpressionException{ 
+		
+		calc.sumar("+");
+		
+	}
+	
+	@Test (expected=BadExpressionException.class)
+	public void expresionIncorrectaArrojaExcepcion() throws BadExpressionException{ 
+		
+		calc.sumar("1;4+2");
 		
 	}
 
